@@ -46,6 +46,29 @@ var spotifyThisSong = function(song){
     );
 };
 
+//Switch command from class 
+function mySwitch(userCommand) {
+
+    switch (userCommand) {
+
+        case "my-tweets":
+            getTweets();
+            break;
+
+        case "spotify-this-song":
+            getSpotify();
+            break;
+
+        case "movie-this":
+            getMovie();
+            break;
+
+        case "do-what-it-says":
+            doWhat();
+            break;
+    }
+}
+
 var concertThis = function(artist){
     var region = ""
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
