@@ -51,12 +51,12 @@ function mySwitch(userCommand) {
 
     switch (userCommand) {
 
-        case "my-tweets":
-            getTweets();
-            break;
-
         case "spotify-this-song":
             getSpotify();
+            break;
+
+        case "concert-this":
+            getConcert();
             break;
 
         case "movie-this":
