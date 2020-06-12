@@ -29,7 +29,7 @@ function mySwitch(userCommand) {
             break;
 
         case "concert-this":
-            getConcert();
+            getConcert(secondCommand);
             break;
 
         case "movie-this":
