@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/jcqlng/liri-node-app/issues"
   },
-  "homepage": "https://github.com/jcqlng/liri-node-app#readme"
+  "homepage": "https://github.com/jcqlng/liri-node-app#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "fs": "0.0.1-security",
+    "moment": "^2.26.0"
+  }
 }
