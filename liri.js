@@ -37,7 +37,7 @@ function mySwitch(userCommand) {
             break;
 
         case "do-what-it-says":
-            doWhat();
+            doWhat(secondCommand);
             break;
     }
 }
@@ -150,5 +150,34 @@ var getMovie = function (movieName) {
     .finally(function () {
         // always executed
         console.log("End of movies.")
+    });
+}
+
+var doWhat = function(itSays) {
+
+    
+    //open the random.txt file and read the entire text into an array
+    fs.readFile("random.txt", function(err, data){
+        //split the data into a lines array
+        var lines = data.split("\n");
+
+        //initialize an empty line. will put the found line into it
+        var found = "";
+        //loop through the lines and see if the "itSays" text can be found
+        for(var i=0; i < lines.length; i++){
+
+            if(lines[i].includes("itSays")) {
+                //assign the value of the line to the found variable
+                found = lines[i].split(",")[1];
+                //break out of the loop once it's found
+                break;
+            }
+            
+        }
+
+        //if found is not empty, call the mySwitch function again
+        if(found !== ""){
+            mySwitch(found);
+        }
     });
 }
