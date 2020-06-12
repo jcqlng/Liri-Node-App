@@ -12,11 +12,39 @@ var userCommand = process.argv[2];
 var secondCommand = process.argv[3];
 
 
-// initializes spotify api with the keys in .env file
-var spotify = new Spotify(keys.spotify);
+
+
+
+
+//Switch command from class 
+function mySwitch(userCommand) {
+
+    switch (userCommand) {
+
+        case "spotify-this-song":
+            //search for a song on spotify using the second command as the song title parameter
+            getSpotify(secondCommand);
+            break;
+
+        case "concert-this":
+            getConcert();
+            break;
+
+        case "movie-this":
+            getMovie();
+            break;
+
+        case "do-what-it-says":
+            doWhat();
+            break;
+    }
+}
 
 // function for spotify search 
 var spotifyThisSong = function(song){
+    // initializes spotify api with the keys in .env file
+    var spotify = new Spotify(keys.spotify);
+
     if (songName === undefined) {
         songName = "What's my age again";
     }
@@ -46,33 +74,12 @@ var spotifyThisSong = function(song){
     );
 };
 
-//Switch command from class 
-function mySwitch(userCommand) {
-
-    switch (userCommand) {
-
-        case "spotify-this-song":
-            getSpotify();
-            break;
-
-        case "concert-this":
-            getConcert();
-            break;
-
-        case "movie-this":
-            getMovie();
-            break;
-
-        case "do-what-it-says":
-            doWhat();
-            break;
-    }
-}
-
 var concertThis = function(artist){
     var region = ""
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
 
 }
 
-
+function getMovie() {
+    var movieName = secondCommand;
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&apikey=codingbootcamp"
