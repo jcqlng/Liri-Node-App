@@ -33,7 +33,7 @@ function mySwitch(userCommand) {
             break;
 
         case "movie-this":
-            getMovie();
+            getMovie(secondCommand);
             break;
 
         case "do-what-it-says":
@@ -119,7 +119,36 @@ var concertThis = function(artist){
 
 }
 
-function getMovie() {
-    var movieName = secondCommand;
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&apikey=codingbootcamp"
+var getMovie = function (movieName) {
+    
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&apikey="+ keys.omdb.secret;
+
+    //execute a GET call with the queryurl to get the results back
+    axios.get('/user?ID=12345')
+    .then(function (response) {
+        // handle success
+        console.log(response);
+
+        //loop through the response and print the results
+        for(var i = 0; i < response.length, i++) {
+            var movie = response[i];
+
+            // Title of the movie. => movie.Title
+            // Year the movie came out. => movie.Year
+            // IMDB Rating of the movie. => movie.imdbRating 
+            // Rotten Tomatoes Rating of the movie. => movie.Metascore
+            // Country where the movie was produced. => movie.Country
+            // Language of the movie. => movie.Language
+            // Plot of the movie. => movie.Plot
+            // Actors in the movie. => movie.Actors
+        }
+    })
+    .catch(function (error) {
+        // handle error
+        console.log(error);
+    })
+    .finally(function () {
+        // always executed
+        console.log("End of movies.")
+    });
 }
