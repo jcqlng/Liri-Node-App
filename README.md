@@ -17,7 +17,7 @@ The liri node app is a Language Interpretation and Recognition Interface. LIRI i
      * Date of the Event (use moment to format this as "MM/DD/YYYY")
     * Screenshots: 
       * Concert-this command:
-        * ![concert-this-command](/screenshots/concert-this-command.png)
+        ![concert-this-command](/screenshots/concert-this-command.png)
       * ![concert-this-result](/screenshots/concert-this-result.png)
 
 2. `node liri.js spotify-this-song '<song name here>'`
