@@ -1,82 +1,66 @@
-// code to read and set any environment variables with the dotenv package 
 require("dotenv").config();
 
-
-// import the node-spotify-api ,api keys, request for npm, & fs package
+// Import the node-spotify-api NPM package.
 var Spotify = require("node-spotify-api");
+
+// Import the API keys
 var keys = require("./keys");
-var request = require("request");
-var fs = require("fs");
+
+// Import the axios npm package.
+var axios = require("axios");
+
+// Import the moment npm package.
 var moment = require("moment");
 
-//argv[2] chooses users actions; argv[3] is input parameter, ie; movie title
+// Import the FS package for read/write.
+var fs = require("fs");
+
+// Initialize the spotify API client using our client id and secret
+var spotify = new Spotify(keys.spotify);
+
 var userCommand = process.argv[2];
 var secondCommand = process.argv[3];
 
+// FUNCTIONS
+// =====================================
 
+// Helper function that gets the artist name
+var getArtistNames = function(artist) {
+    return artist.name;
+  };
 
-mySwitch(userCommand);
-
-
-//Switch command from class 
-function mySwitch(userCommand) {
-
-    switch (userCommand) {
-
-        case "spotify-this-song":
-            //search for a song on spotify using the second command as the song title parameter
-            getSpotify(secondCommand);
-            break;
-
-        case "concert-this":
-            getConcert(secondCommand);
-            break;
-
-        case "movie-this":
-            getMovie(secondCommand);
-            break;
-
-        case "do-what-it-says":
-            doWhat(secondCommand);
-            break;
-    }
-}
-
-// function for spotify search 
-var spotifyThisSong = function(song){
-    // initializes spotify api with the keys in .env file
-    var spotify = new Spotify(keys.spotify);
-
+// Function for running a Spotify search
+var getMeSpotify = function(songName) {
     if (songName === undefined) {
-        songName = "What's my age again";
+      songName = "What's my age again";
     }
-
+  
     spotify.search(
-        {
-            type: "track",
-            query: userCommand
-        },
-        function (err, data) {
-            if (err) {
-                console.log("Error occurred: " + err);
-                return;
-            }
-
-            var songs = data.tracks.items;
-
-            for (var i = 0; i < songs.length; i++) {
-                console.log(i);
-                console.log("artist(s): " + songs[i].artists.map(getArtistNames));
-                console.log("song name: " + songs[i].name);
-                console.log("preview song: " + songs[i].preview_url);
-                console.log("album: " + songs[i].album.name);
-                console.log("-----------------------------------");
-            }
+      {
+        type: "track",
+        query: songName
+      },
+      function(err, data) {
+        if (err) {
+          console.log("Error occurred: " + err);
+          return;
         }
+  
+        var songs = data.tracks.items;
+  
+        for (var i = 0; i < songs.length; i++) {
+          console.log(i);
+          console.log("artist(s): " + songs[i].artists.map(getArtistNames));
+          console.log("song name: " + songs[i].name);
+          console.log("preview song: " + songs[i].preview_url);
+          console.log("album: " + songs[i].album.name);
+          console.log("-----------------------------------");
+        }
+      }
     );
-};
+  };
 
-var concertThis = function(artist){
+var getConcert = function(artist){
     var region = ""
     //query url that will find a concert based on an artist name
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
@@ -89,9 +73,9 @@ var concertThis = function(artist){
         // handle success
         
         //loop through the results and display each on the console
-        for(var i = 0; i < response.length; i++){
+        for(var i = 0; i < response.data.length; i++){
             //grab the event object for each loop
-            var event = response[i];
+            var event = response.data[i];
 
             //display all the necessary items on the console
             var venue = event.title === "" ? event.artist.name + "@" + event.venue.name : event.title;
@@ -114,34 +98,41 @@ var concertThis = function(artist){
         // always executed
         console.log("End of concerts")
     });
-
-    
-
 }
 
 var getMovie = function (movieName) {
     
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&apikey="+ keys.omdb.secret;
+    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&i=" + keys.omdb.id + "&apikey="+ keys.omdb.secret;
 
     //execute a GET call with the queryurl to get the results back
     axios.get(queryUrl)
     .then(function (response) {
         // handle success
-        console.log(response);
+        //console.log(response);
 
         //loop through the response and print the results
-        for(var i = 0; i < response.length; i++) {
-            var movie = response[i];
+        
+            var movie = response.data;
 
             // Title of the movie. => movie.Title
+            console.log("Title: " + movie.Title);
             // Year the movie came out. => movie.Year
-            // IMDB Rating of the movie. => movie.imdbRating 
+            console.log("Release Year: " + movie.Year);
+            // IMDB Rating of the movie. => movie.imdbRating
+            console.log("IMdB Rating: " + movie.imdbRating); 
             // Rotten Tomatoes Rating of the movie. => movie.Metascore
+            console.log("Rotten Tomatoes Rating: " + movie.Metascore);
             // Country where the movie was produced. => movie.Country
+            console.log("Country: " + movie.Country);
             // Language of the movie. => movie.Language
+            console.log("Language: " + movie.Language);
             // Plot of the movie. => movie.Plot
+            console.log("Plot: " + movie.Plot);
             // Actors in the movie. => movie.Actors
-        }
+            console.log("Actors: " + movie.Actors);
+
+            console.log("--------------------------------------------")
+        
     })
     .catch(function (error) {
         // handle error
@@ -151,33 +142,71 @@ var getMovie = function (movieName) {
         // always executed
         console.log("End of movies.")
     });
-}
+};
 
 var doWhat = function(itSays) {
-
     
     //open the random.txt file and read the entire text into an array
-    fs.readFile("random.txt", function(err, data){
-        //split the data into a lines array
-        var lines = data.split("\n");
+    var data = fs.readFileSync("random.txt", "utf-8");
+    //split the data into a lines array
+    var lines = data.split("\r");
+    //initialize an empty line. will put the found line into it
+    var found = "";
+    //loop through the lines and see if the "itSays" text can be found
+    for(var i=0; i < lines.length; i++){
 
-        //initialize an empty line. will put the found line into it
-        var found = "";
-        //loop through the lines and see if the "itSays" text can be found
-        for(var i=0; i < lines.length; i++){
+        if(lines[i].includes(itSays)) {
+            //assign the value of the line to the found variable
+            found = lines[i].split(",")[1];
+            //break out of the loop once it's found
+            break;
+        }   
+    }
 
-            if(lines[i].includes("itSays")) {
-                //assign the value of the line to the found variable
-                found = lines[i].split(",")[1];
-                //break out of the loop once it's found
-                break;
-            }
-            
+    //if found is not empty, call the mySwitch function again
+    if(found !== ""){
+        switch(itSays) {
+            case "spotify-this-song":
+            //search for a song on spotify using the second command as the song title parameter
+            getMeSpotify(found);
+            break;
+
+            case "concert-this":
+            getConcert(found);
+            break;
+
+            case "movie-this":
+            getMovie(found);
+            break;
         }
+    }
 
-        //if found is not empty, call the mySwitch function again
-        if(found !== ""){
-            mySwitch(found);
-        }
-    });
-}
+    
+};
+
+var mySwitch = function (userCommand) {
+
+    switch (userCommand) {
+
+        case "spotify-this-song":
+            //search for a song on spotify using the second command as the song title parameter
+            getMeSpotify(secondCommand);
+            break;
+
+        case "concert-this":
+            getConcert(secondCommand);
+            break;
+
+        case "movie-this":
+            getMovie(secondCommand);
+            break;
+
+        case "do-what-it-says":
+            doWhat(secondCommand);
+            break;
+    };
+};
+
+
+//Main function call -> here is where the program starts
+mySwitch(userCommand)
