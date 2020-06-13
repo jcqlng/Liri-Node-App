@@ -63,7 +63,7 @@ var getMeSpotify = function(songName) {
 var getConcert = function(artist){
     var region = ""
     //query url that will find a concert based on an artist name
-    var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
+    var queryUrl = "https://rest.bandsintown.com/artists/" + escape(artist) + "/events?app_id=codingbootcamp"
 
     //execute the search query and wait for a return object 
     //will do this using Axios GET command 
@@ -102,7 +102,7 @@ var getConcert = function(artist){
 
 var getMovie = function (movieName) {
     
-    var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&i=" + keys.omdb.id + "&apikey="+ keys.omdb.secret;
+    var queryUrl = "http://www.omdbapi.com/?t=" + escape(movieName) + "&y=&plot=short&tomatoes=true&i=" + keys.omdb.id + "&apikey="+ keys.omdb.secret;
 
     //execute a GET call with the queryurl to get the results back
     axios.get(queryUrl)
