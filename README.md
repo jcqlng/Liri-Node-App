@@ -32,7 +32,7 @@ The liri node app is a Language Interpretation and Recognition Interface. LIRI i
      * The album that the song is from
     * Screenshots:
       * ![spotify-this-song-command](/screenshots/spotify-this-song-command.png)
-      * ![spotify-this-song-results](/screenshots/spotify-this-song-spotify-this-song-results.png)
+      * ![spotify-this-song-results](/screenshots/spotify-this-song-results.png)
 
 3. `node liri.js movie-this '<movie name here>'`
 
