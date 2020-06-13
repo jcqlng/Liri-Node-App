@@ -18,7 +18,8 @@ The liri node app is a Language Interpretation and Recognition Interface. LIRI i
     * Screenshots: 
       * Concert-this command:
         ![concert-this-command](/screenshots/concert-this-command.png)
-      * ![concert-this-result](/screenshots/concert-this-result.png)
+      * Concert-this result: 
+        ![concert-this-result](/screenshots/concert-this-result.png)
 
 2. `node liri.js spotify-this-song '<song name here>'`
 
@@ -32,8 +33,10 @@ The liri node app is a Language Interpretation and Recognition Interface. LIRI i
 
      * The album that the song is from
     * Screenshots:
-      * ![spotify-this-song-command](/screenshots/spotify-this-song-command.png)
-      * ![spotify-this-song-results](/screenshots/spotify-this-song-results.png)
+      * Spotify-this command:
+        ![spotify-this-song-command](/screenshots/spotify-this-song-command.png)
+      * Spotify-this results:
+        ![spotify-this-song-results](/screenshots/spotify-this-song-results.png)
 
 3. `node liri.js movie-this '<movie name here>'`
 
@@ -53,8 +56,10 @@ The liri node app is a Language Interpretation and Recognition Interface. LIRI i
    * If the user doesn't type a movie in, the program will output data for the movie 'Mr. Nobody.'
 
     * Screenshots:
-      * ![Movie this command](/screenshots/movie-this-command.png)
-      * ![Movie this results](/screenshots/movie-this-result.png)
+      * Movie-this command:
+        ![Movie this command](/screenshots/movie-this-command.png)
+      * Movie-this results:
+        ![Movie this results](/screenshots/movie-this-result.png)
 
 4. `node liri.js do-what-it-says`
 
@@ -64,12 +69,18 @@ The liri node app is a Language Interpretation and Recognition Interface. LIRI i
 
      * Edit the text in random.txt to test out the feature for movie-this and concert-this.
     * Screenshots:
-      * ![Do what is says - concert command](/screenshots/do-what-it-says-concert-this-command.png)
-      * ![Do what is says - concert results](/screenshots/do-what-it-says-concert-this-result.png)
-      * ![Do what is says - song command](/screenshots/do-what-it-says-movie-this-command.png)
-      * ![Do what is says - song results](/screenshots/do-what-it-says-movie-this-result.png)
-      * ![Do what is says - movie command](/screenshots/do-what-it-says-spotify-command.png)
-      * ![Do what is says - movie results](/screenshots/do-what-it-says-spotify-result.png)
+      * Do-what-it-says concert-this command:
+        ![Do what is says - concert command](/screenshots/do-what-it-says-concert-this-command.png)
+      * Do-what-it-says concert-this result:
+        ![Do what is says - concert results](/screenshots/do-what-it-says-concert-this-result.png)
+      * Do-what-it-says movie-this command:
+        ![Do what is says - song command](/screenshots/do-what-it-says-movie-this-command.png)
+      * Do-what-it-says movie-this result:
+        ![Do what is says - song results](/screenshots/do-what-it-says-movie-this-result.png)
+      * Do-what-it-says spotify-this-song command:
+        ![Do what is says - movie command](/screenshots/do-what-it-says-spotify-command.png)
+      * Do-what-it-says spotify-this-song result:
+        ![Do what is says - movie results](/screenshots/do-what-it-says-spotify-result.png)
 
 
 # API & Packages & Dependencies
