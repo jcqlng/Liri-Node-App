@@ -15,7 +15,7 @@ var secondCommand = process.argv[3];
 
 
 
-
+mySwitch(userCommand);
 
 
 //Switch command from class 
@@ -124,13 +124,13 @@ var getMovie = function (movieName) {
     var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&tomatoes=true&apikey="+ keys.omdb.secret;
 
     //execute a GET call with the queryurl to get the results back
-    axios.get('/user?ID=12345')
+    axios.get(queryUrl)
     .then(function (response) {
         // handle success
         console.log(response);
 
         //loop through the response and print the results
-        for(var i = 0; i < response.length, i++) {
+        for(var i = 0; i < response.length; i++) {
             var movie = response[i];
 
             // Title of the movie. => movie.Title
