@@ -53,7 +53,7 @@ The liri node app is a Language Interpretation and Recognition Interface. LIRI i
 
     * Screenshots:
       * ![Movie this command](/screenshots/movie-this-command.png)
-      * ![Movie this results](/screenshots/movie-this-results.png)
+      * ![Movie this results](/screenshots/movie-this-result.png)
 
 4. `node liri.js do-what-it-says`
 
