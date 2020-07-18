@@ -1,8 +1,6 @@
-# liri-node-app
+# Liri-Node-App
 
-# Description 
-
-The liri node app is a Language Interpretation and Recognition Interface. LIRI is a command line node app that takes in parameters and gives you back data.
+The Liri Node App is a Language Interpretation and Recognition Interface. LIRI is a command line node app that takes in parameters and gives you back data.
 
 # Command Functions
 * Breakdown of commands copied from Bootcamp Repo 
@@ -96,3 +94,8 @@ The liri node app is a Language Interpretation and Recognition Interface. LIRI i
 * [DotEnv](https://www.npmjs.com/package/dotenv)
 
 # Authors and Acknowledgements 
+* [Wikipedia: Node.js](https://en.wikipedia.org/wiki/Node.js)
+* [Wikipedia: V8](https://en.wikipedia.org/wiki/Chrome_V8)
+* [Wikipedia: Server](https://en.wikipedia.org/wiki/Server_(computing))
+* [fs Documentation](https://node.readthedocs.io/en/latest/api/fs/)
+* [InquirerJS](https://www.npmjs.com/package/inquirer/v/0.2.3)
